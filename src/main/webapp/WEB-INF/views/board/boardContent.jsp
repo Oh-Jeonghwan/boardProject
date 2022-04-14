@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BoardContent</title>
     <style>
+        div{border:1px black solid;}
         .contentTable{
             border:1px black solid;
         }
@@ -34,7 +37,6 @@
         .number1, .date1,
         .writer1, .count1{
             text-align: center;
-            background-color: bisque;
             width:28%;
         }
 
@@ -45,7 +47,6 @@
 
         .title1, .content1{
             text-align: center;
-            background-color: bisque;
             width:138.36px;
         }
 
@@ -66,7 +67,7 @@
     <br>
     <div class="wrap">
         <div class="contentTable">
-            <!-- ~~1: 라벨, ~~2: 내용 -->
+            <!-- ~~1: ë¼ë²¨, ~~2: ë´ì© -->
             <div class="firstLine">
                 <div class="contentNumber">
                     <div class="number1">
@@ -78,7 +79,7 @@
                 </div>
                 <div class="contentDate">
                     <div class="date1">
-                        날짜
+                        작성 날짜
                     </div>
                     <div class="date2">
                         2022.04.13
@@ -106,7 +107,7 @@
             <div class="thirdLine">
                 <div class="contentTitle">
                     <div class="title1">
-                        제목
+                        글제목
                     </div>
                     <div class="title2">
                         제목입니다.
@@ -118,7 +119,7 @@
                     글내용
                 </div>
                 <div class="content2">
-                    asdasfasdf
+                    asㅁㄴㅇㄻㄴㅇㄹ
                 </div>
             </div>
         </div>

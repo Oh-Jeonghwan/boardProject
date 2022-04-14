@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,13 +31,13 @@
     </style>
 </head>
 <body>
-    <h1 align="center">게시판</h1>
+    <h1 align="center">ê²ìí</h1>
     <br>
     <div class="wrap">
         <table class="board">
             <tr>
-                <th style="width:50px;">글 번호</th>
-                <th style="width:600px;">글 제목</th>
+                <th style="width:50px;">글번호</th>
+                <th style="width:600px;">제목</th>
                 <th style="width:10%;">날짜</th>
                 <th style="width:50px;">조회수</th>
             </tr>
@@ -113,12 +115,12 @@
 
         <div class="search" align="center">
             <select name="" id="">
-                <option value="">제목</option>
-                <option value="">글내용</option>
+                <option value="">ì ëª©</option>
+                <option value="">ê¸ë´ì©</option>
             </select>
 
             <input type="text"> &nbsp;
-            <button type="submit">검색</button>
+            <button type="submit">ê²ì</button>
         </div>
         
         <script>

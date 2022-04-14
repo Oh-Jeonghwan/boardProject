@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"><!-- xml 파일의 유효성 체크를 위한 부분 -->
-  <mapper namespace="menu">
+  <mapper namespace="board">
   	<!-- 
   		mapper는 구문을 만들 수 있는 영역
   		일반적으로 테이블 1개당 1개씩의 mapper를 둔다.
@@ -17,25 +17,16 @@
   	 					즉, 자바 메소드에서의 매개변수와 비슷한 의미
   	 					채울 필요가 없으면 생략 가능
   	  -->
-  	 <insert id="insertMenu" parameterType="menu">
- 	 <!-- 
- 	 	MyBatis 방식: 해당 parameterType으로 받은 객체 타입의 필드값을 뽑아오고자 할 때
- 	 				#{필드명}으로 작성한다.
- 	  -->
-  	 	INSERT INTO MENU (NAME,PRICE)
-  	 	VALUES(#{name},#{price})
-  	 </insert>
-  	
-  	 <!-- 
- 		*쿼리문을 작성할 때 알아야 할 설정 값
- 		-id : 구문을 외부에서 호출하기 위한 식별값
- 		-parameterType: 구문을 실행하기 위해 필요한 데이터 유형(매개변수와 유사)
- 		-resultType: Select 구문이 실행된 결과물의 타입(리턴타입이랑 유사)
- 					단, One 이든 List 든 구분은 안 함
-  	  --> 
-  	 <select id="selectMenuList" resultType="menu">
-  	 	SELECT * 
-  	 	FROM MENU
-  	 	ORDER BY PRICE DESC
+  	 <select id="selectList" parameterType="map" resultType="board">
+  	 	SELECT *
+  	 	FROM (SELECT ROWNUM RNUM, A.*
+  	 		  FROM(SELECT *
+  	 		 	   FROM BOARD
+	  			   WHERE STATUS='Y' 
+			  	   <if test="condition != null and keyword != null">
+			  	 	  AND ${condition} LIKE '%#{keyword}%'
+		  	 	   </if>
+  	 		 	   ORDER BY ENROLL_DATE DESC)A)
+  	 	<!--WHERE RNUM BETWEEN #{} AND #{}  -->
   	 </select>
   </mapper>

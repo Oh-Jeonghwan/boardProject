@@ -20,7 +20,7 @@
   	<setting name="autoMappingBehavior" value="FULL"></setting>
   	<!-- 
   		컬럼을 필드/프로퍼티에 자동으로 매핑할지 말지 결정
-  		(개팔자 입장에서는 좋음=> 다 매핑해주니까)
+  		(개발자 입장에서는 좋음=> 다 매핑해주니까)
   		(단, 성능이 좀 떨어질 수는 있다.)
   	 -->
   	 <setting name="mapUnderscoreToCamelCase" value="true"></setting>
@@ -34,6 +34,7 @@
   <!-- typeAliases -->
   <typeAliases>
   	<!--<typeAlias alias="별칭" type="vo파일 경로"></typeAlias>  -->
+  	<typeAlias alias="board" type="com.nmsoft.boardProject.board.model.vo.Board"></typeAlias>
  	
   </typeAliases>
 </configuration>
