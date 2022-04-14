@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+
+	<!-- 
+		web.xml 파일상에서 인코딩 설정하는 법
+		=> Spring에서 제공하는 Encoding 관련 이브러리를 이용
+		=> 서블릿 filter 라는 개념을 적용시켜서 인코딩 설정을 할 것
+		org.springframework.web.filter.CharacterEncodingFilter 라이브러리를 사용하겠다.
+	
+		*필터(Servlet)
+		모든 서블릿이나 JSP가 공통적으로 필요로 하는 기능들을
+		클라이언트의 요청을 서블릿이 받기 전에 먼저 가로채서 서블릿이 호출되기 이전에
+		배포서술자에(web.xml) 의해 작성된 필터로 먼저 수행되게끔 하겠다.
+		=> 즉, 선처리의 개념
+		
+		* 필터 등록 방법
+		- filter 태그(필터를 만듦), filter-mapping 태그(적용하겠다.)
+		- 반드시 filter-name 태그로 필터명을 지정해야 한다.
+	-->
+	<!-- 필터 생성 -->
+	<filter>
+		<filter-name>encodingFilter</filter-name><!-- 필터명 -->
+		<filter-class><!-- 필터 라이브러리명 -->
+			org.springframework.web.filter.CharacterEncodingFilter
+		</filter-class>
+		<!-- 옵션을 걸 때는 키(name) - 밸류(value)-->
+		<!-- 옵션1 : 인코딩 방식을 UTF-8로 지정 -->
+		<init-param>
+			<param-name>encoding</param-name><!-- 키값 -->
+			<param-value>UTF-8</param-value>
+		</init-param>
+		
+		<!-- 옵션2: 혹시나 충돌 시 위의 인코딩이 적용 안 될 수도 있으므로 강제 인코딩 설정도 해줘야  -->
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	
+	<!-- 
+		필터 적용(키밸류 세트) 
+		모든 요청에 대해서 요청(모든 url 주소의 시작점의 하위 모든 요청=> localhost:8888/*)을 처리하기 전에 필터를 적용시키겠다.
+	-->
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name><!-- 필터명(키) -->
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
+	<!-- 
+		최상위 설정파일의 경로를 등룍한 부분 
+		=> 스프링에서 최상위설정 파일은 root-context.xml 파일임을 알 수 있다.
+	-->	
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/spring/root-context.xml</param-value>
+	</context-param>
+	
+	<!-- Creates the Spring Container shared by all Servlets and Filters -->
+	<!-- 
+		모든 설정파일을 연결할 수 있는 도구를 등록한 부분
+	 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- Processes application requests -->
+	<!-- 
+		응용 프로그램의 요청 처리를 어떻게 한 건지 등록한 부분
+		즉, 요청을 처리하는 메인 서블릿을 등록한 부분(무조건 있어야 함)
+		=> 해당 서블릿명: DispatcherServlet(요청 분배자)****
+	-->
+	<servlet>
+		<servlet-name>appServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		
+		<!-- 
+			추가적인 설정에 관련된 내용을 등록
+			servlet-context.xml: 추가적인 요청 사항을 등록해주는 부분이다. (도구들 == beans)
+		 -->
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup><!-- 우선순위가 1번이다. -->
+	</servlet>
+		
+	<!-- 기존의 url 매핑값 설정 부분과 비슷 -->
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+</web-app>

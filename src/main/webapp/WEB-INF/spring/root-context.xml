@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						https://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context 
+						https://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- DispatcherServlet 과 관련된 설정 이외의 모든 요소에 대한 설정들을 작성한다.-->
+	<!-- 
+		도구 분리의 기준: DispatcherServlet과 롼련된 설정들은 servlet-context.xml에
+					(== 사용자의 요청이 있을 때만 쓰는 것들은 servlet-context.xml에)
+	 -->
+	 
+	 <!-- 
+		jar를 다운 받았다고 그냥 쓸 수 있는 것이 아님
+		jar 파일 안에 패키지 안에 내가 쓰고자하는 .class 파일을 도구(bean)로서 가져다 쓰겠다고
+		추가를 해줘야 함
+		
+		순서
+		1. pom.xml 에 내가 필요로 하는 jar 파일을 추가하는 구문 작성(dependency 태그로)
+		2. Maven Update => Maven Dependencies 에 추가된 것을 확인
+		3. 내가 그중에서도 필요ㅛ한 도구를 servlet-context.xml 파일에 bean으로  등록
+		
+		* 데이터베이스 도구 등록 
+		- 연결 도구: org.springframework.jdbc.datasource.DriverManagerDataSource.class
+		- 명령 도구: org.springframework.jdbc.core.JdbcTemplate.class
+		
+		=> db 처리 같은 경우는 Controller 가 아닌 Dao 에서 이뤄지므로 root-context.xml로 옮겼다.
+			(dataSource, jdbcTemplate, sqlSession, sqlSessionTemplate)
+		*그럼 그동안 우리는 servlet-context.xml에 모든 설정을 다 몰아 넣고
+		root-context.xml에 설정 내용이 없어도 문제없이 잘 돌아는 것=>root-context.xml이 servlet-context.xml의 부모
+	 -->
+	 <!-- 연결 도구 등록 -->
+	 <!-- 연결 도구를 등록하기 전에 외부 properties 형식의 파일을 가지고 와서 연동하겠따. -->
+	 <context:property-placeholder location="classpath:/jdbc/driver.properties"></context:property-placeholder>
+	 <!-- id: 이 도구의 이름을 지정하겠다. -->
+	 <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"><!-- 도구를 어디서 가져다가 등록하겠다. -->
+	 	<!-- 추가적인 도구의 사용법 지정(도구의 환경설정값, 키-밸류 세트) => property 태그를 이용-->
+	 	<!-- driverClassName, url, username, password 등록 =>driver.properties에 있던 애들 -->
+	 	<property name="driverClassName" value="${jdbc.driver}"></property>
+	 	<property name="url" value="${jdbc.url}"></property>
+	 	<property name="username" value="${jdbc.username}"></property>
+	 	<property name="password" value="${jdbc.password}"></property><!--이 도구를 어떤 식으로 사용하겠다. -->
+	 </bean>
+	 	
+	 <!-- 명령 도구 등록 -->
+	 <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+	 	<property name="dataSource" ref="dataSource"></property>
+	 	<!-- 명령을 내릴 때 위에서 지정했던 연결도구를 참조해서 명령을 내리겠다. -->
+	 	<!-- DI (Dependency Injection) : 필요한 도구를 주입히키겠다. -->
+	 </bean>
+	 
+	 <!-- 
+	 	*MyBatis를 이용하기 위한 도구를 등록
+	 	-sqlSession: 실제로 SQL 구문을 실행시키는 도구
+	 		org.mybatis.spring.SqlSessionFactoryBean.class
+	 	-sqlSessionTemplate: 구문 실행을 위한 템플릿을 제공하는 도구
+	 		org.mybatis.spring.SqlSessionTemplate.class
+	  -->
+	  <!-- sqlSession: 명령도구(==실행도구)를 등록 -->
+	  <bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+	  	<!-- 연결을 위한 도구를 참조(ref)설정 -->
+	  	<property name="dataSource" ref="dataSource"></property>
+	  	<!-- mybatis 설정 파일(mybatis-config.xml)의 위치를 지정 -->
+	  	<property name="configLocation" value="classpath:/mybatis-config.xml"></property>
+		<!-- 실제 실행할 쿼리문이 담긴 명령 파일(xxx-mapper.xml) 위치를 지정-->
+		<property name="mapperLocations" value="classpath:/mappers/**/*-mapper.xml"></property>
+	  </bean>
+	  
+	  <!-- sqlSessionTemplate: 연결도구 등록 -->
+	  <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+	  		<!-- MyBatis 실행 도구에 대한 참조(ref) 설정 -->
+	  		<constructor-arg index="0" ref="sqlSession"></constructor-arg>
+	  </bean>
+</beans>

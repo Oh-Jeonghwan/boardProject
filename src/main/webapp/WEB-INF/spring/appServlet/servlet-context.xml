@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<!-- 
+		스프링에서의 모든 요청은 우선적으로 DispatcherServlet 을 거친다.
+		우리가 원하는 방향대로, 내 입맛대로 요청을 분배받고 싶다면
+		추가적인 설정 사항을 servlet-context.xml 파일에다 적는다.(도구 등록)
+		
+		- 도구 등록 방법1: beans:bean 태그 이용, id="도구명" class="클래스명"
+		- 도구 등록 방법2: component-scan 태그, 감시할 패키지명 적기!
+					어노테이션이 붙은 클래스들을 도구로 등록해주는 역할
+		
+		- 도구를 등록하게 되면 그 도구들을 Spring Container(IoC Container) 에  보관
+		=> Ioc에 대표적인 예
+		(개발자가 직접 객체를 생성하고 관리할 필요 없이 Spring Container 가 도구 관리)
+		-도구를 등록할 떄 기존에 있던 도구를 참조해서 쓰는 개념을 DI
+		
+	 -->
+	
+	
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	<!-- 스프링의 가장 핵심 부품인 DispatcherServlet 이 추가적으로 알아야 할 설정들을 등록하는 파일 -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<!-- @Controller 와 같은 스프링에서 주로 쓰이는 어노테이션을 활성화 시켜주는 설정 -->
+	<annotation-driven />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<!-- 
+		resources: 정적 자원들을 담아두는 폴더
+				   이미지. css. js. 파일 등을 의미함 => 컴파일 등의 사전 작업 없이 접근 가능한  파일들(정적 자원들)
+		=> 동적 자원들을 담아두는 폴더: src (source의 약자)
+		
+		resources 설정: 정적 자원 같은 
+		
+		resource 설정: 정적 자원 같은 경우 DispatcherServlet 이 처리할 수 없음
+					 있는 그대로 사전 처리 없이 접근할 수 있도록 해야 함
+			=> location: 실제 webapp 폴더 내의 위치를 의미
+			=> mapping: 접근할 주소를 제시 (**는 하위 모든 내용을 의미)
+			즉, 설정을 하게 되면 resources 라는 폴더까지는 기본 경로를 잡아줘서 파일에 사전처리 없이 접근하도록 하는 것
+	-->
+	<resources mapping="/resources/**" location="/resources/" />
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<!--  
+		주소 자동 완성 도구(View Resolver)를 등록하는 부분
+		- 매번 /WEB-INF/view/xxx.jsp를 적기 귀찮으니까 자동완성
+		- view resolver 라는 도구(bean)를 등록(Spring 에서 제공해줌)
+		(도구를 둥록하겠다 == bean 을 등록하겠다 == 외부 라이브러리에서 제공하는 클래스를 가져다 쓰겠다.)
+			=> class: 패키지 경로를 포함한 내가 가져다 쓸 클래스명
+			=> beans:property: 추가적인 설정값들을 작성
+			=> prefix: 접두어 / suffix: 접미어
+		즉, 앞으로 작성할 return "파일명" 부분에 접두어랑 접미어를 항상 붙여서 요청하겠다.
+	-->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+
+	  <!-- 
+	  		파일 업로드를 처리하는 도구 등록
+	  		(multi/form-data 요청을 처리하는 도구)
+	  		org.springframework.web.multipart.commons.CommonsMultipartResolver.class
+	   
+	   		주의할 점: id는 무조건 multipartResolver라고 지어야 한다.(일종의 고유명사)
+	   		=> DispatcherServlet 에서 이미 multipartResolver 라고 부르기 때문
+	   -->
+	 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	 		<!-- defaultEncoding: 업로드 되는 파일에 대한 인코딩 방식 지정 -->
+	 		<beans:property name="defaultEncoding" value="UTF-8"></beans:property>
+	 		<!-- 
+	 			업로드 되는 파일의 사이즈에 대한 지정
+	 			-maxUploadSize: 한번에 전체 업로드 되는 파일의 총 용랑 지정
+	 			-maxUploadSizePerFile: 파일별 업로드 되는 총 용량 지정(개별 파일 크기)
+	 			
+	 			=> 총 파일의 최대 용량은 10MByte 
+	 			10m = 1024*1024*10
+	 			but, xml 에서는 계산해서 넣어줘야한다.
+	 			계산 결과: 10,485,760 => 대략 10,000,000으로 사이즈를 잡자
+	 					5,242,880
+	 		 -->
+	 		<beans:property name="maxUploadSize" value="10485760"></beans:property>
+	 		<beans:property name="maxUploadSizePerFile" value="5242880"></beans:property>
+	 	</beans:bean>
+	<!--
+		base-package 에서 설정된 패기지와 그 이하의 모든 패키지를 감시하여
+		등록 가능한 도구를 모두 찾아서 자동 등록 시켜주는 설정
+	 -->
+	<context:component-scan base-package="com.nmsoft.boardProject" />
+	
+</beans:beans>

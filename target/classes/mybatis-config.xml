@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd"><!-- xml 파일의 유효성 체크를 위한 부분 -->
+<configuration>
+  
+  <!-- mybatis를 운용하기 윈한 설정이 있다면 이곳에 작성 하는 것이 원칙-->
+  
+  <!-- properties: 이 문서 또는 외부에서 사용할 환경설정과 관련된 변수를  -->
+  <properties></properties>
+  
+  <!-- settings : mybatis 실행 중 반영되어야할 규칙을  지정-->
+  <settings>
+  	<setting name="cacheEnabled" value="true"></setting>
+  	<!-- 캐시 메모리를 사용할지 말지 결정하는 속성 -->
+  	
+  	<setting name="lazyLoadingEnabled" value="true"></setting>
+  	<!-- 로딩을 지연시킬지 말지 -->
+  	
+  	<setting name="autoMappingBehavior" value="FULL"></setting>
+  	<!-- 
+  		컬럼을 필드/프로퍼티에 자동으로 매핑할지 말지 결정
+  		(개팔자 입장에서는 좋음=> 다 매핑해주니까)
+  		(단, 성능이 좀 떨어질 수는 있다.)
+  	 -->
+  	 <setting name="mapUnderscoreToCamelCase" value="true"></setting>
+  	 <!-- 
+  	 	mybatis 에서는 컴럼명과 필드명을 일치시켜야 하는데
+  	 	우리가 자바에서는 낙타표기법을 쓰고 있고, db에서는 언더바를 쓰는 표기법을 쓰고 있기 때문에
+  	 	이 두 가지 표현법을 호환시켜주는 설정
+  	  -->
+  </settings>
+  
+  <!-- typeAliases -->
+  <typeAliases>
+  	<!--<typeAlias alias="별칭" type="vo파일 경로"></typeAlias>  -->
+ 	
+  </typeAliases>
+</configuration>
