@@ -21,7 +21,7 @@
         <form action="">
             <span>제목: </span> <input type="text">
             <br><br>
-            <spqn>작성자: </spqn> <input type="text">
+            <span>작성자: </span> <input type="text">
             
             <br><br>
 
@@ -31,7 +31,7 @@
 
             <br><br>
 
-            <!--aíê·¸ë¡ í ì§ ë²í¼ì¼ë¡ í ì§ ê²°ì -->
+            <!--버튼으로 할지 a태그로 할지 결정 -->
             <button type="submit">등록</button>
             <button>취소</button>
         </form>

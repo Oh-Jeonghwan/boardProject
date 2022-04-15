@@ -11,5 +11,7 @@ public interface BoardService {
 
 	List<Board> selectList(Map<String, Object> param);
 
+	int totalCount(Map<String, Object> param);
+
 
 }

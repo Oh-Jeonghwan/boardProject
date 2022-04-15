@@ -9,4 +9,6 @@ public interface BoardDao {
 
 	List<Board> selectList(Map<String, Object> param);
 
+	int totalCount(Map<String, Object> param);
+
 }

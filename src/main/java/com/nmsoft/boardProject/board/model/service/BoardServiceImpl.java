@@ -19,5 +19,10 @@ public class BoardServiceImpl implements BoardService{
 		return boardDao.selectList(param);
 	}
 
+	@Override
+	public int totalCount(Map<String, Object> param) {
+		return boardDao.totalCount(param);
+	}
+
 
 }

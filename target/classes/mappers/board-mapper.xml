@@ -3,11 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"><!-- xml 파일의 유효성 체크를 위한 부분 -->
   <mapper namespace="board">
-  	<!-- 
-  		mapper는 구문을 만들 수 있는 영역
-  		일반적으로 테이블 1개당 1개씩의 mapper를 둔다.
-  		namespace 속성: 해당 mapper 에 있느 ㄴ쿼리문을 불러올 때 쓸 수 있는 일종의 별칭 
-  	 -->
   	 <!-- 
   	 	MyBatis 방식 : insert, select, update, delete 태그에
   	 				id 속성으로 쿼리문을 구분함
@@ -24,9 +19,19 @@
   	 		 	   FROM BOARD
 	  			   WHERE STATUS='Y' 
 			  	   <if test="condition != null and keyword != null">
-			  	 	  AND ${condition} LIKE '%#{keyword}%'
+			  	 	  AND ${condition} LIKE '%'||#{keyword}||'%'
 		  	 	   </if>
-  	 		 	   ORDER BY ENROLL_DATE DESC)A)
-  	 	<!--WHERE RNUM BETWEEN #{} AND #{}  -->
+  	 		 	   ORDER BY BOARD_NO DESC)A)
+  	 	WHERE RNUM BETWEEN #{pageStart} AND #{perPageNum}
   	 </select>
+  	 
+  	 <select id="totalCount" parameterType="map" resultType="int">
+  	 	SELECT COUNT(*)
+  	 	FROM BOARD
+	  	WHERE STATUS='Y' 
+		<if test="condition != null and keyword != null">
+			AND ${condition} LIKE '%'||#{keyword}||'%'
+		</if>
+  	 </select>
+  	 
   </mapper>

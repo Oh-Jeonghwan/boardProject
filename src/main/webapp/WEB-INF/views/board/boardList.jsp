@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,11 +29,21 @@
             padding:10px;
         }
         
+        ul{
+        	list-style: none;
+        	padding-left: 0px;
+        	display:inline-block;
+        }
+        
+        ul li{
+       		display:inline-block; 
+        }
+        
         
     </style>
 </head>
 <body>
-    <h1 align="center">ê²ìí</h1>
+    <h1 align="center">게시글 목록</h1>
     <br>
     <div class="wrap">
         <table class="board">
@@ -41,88 +53,90 @@
                 <th style="width:10%;">날짜</th>
                 <th style="width:50px;">조회수</th>
             </tr>
-            <tr>
-                <td>10</td>
-                <td>제목입니다.</td>
-                <td>2022.04.13</td>
-                <td>0</td>
-            </tr>
-            <tr>
-                <td>9</td>
-                <td>제목입니다.</td>
-                <td>2022.04.13</td>
-                <td>0</td>
-            </tr>
-            <tr>
-                <td>8</td>
-                <td>제목입니다.</td>
-                <td>2022.04.13</td>
-                <td>0</td>
-            </tr>
-            <tr>
-                <td>7</td>
-                <td>제목입니다.</td>
-                <td>2022.04.13</td>
-                <td>0</td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td>제목입니다.</td>
-                <td>2022.04.13</td>
-                <td>0</td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>제목입니다.</td>
-                <td>2022.04.13</td>
-                <td>0</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>제목입니다.</td>
-                <td>2022.04.13</td>
-                <td>0</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>제목입니다.</td>
-                <td>2022.04.13</td>
-                <td>0</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>제목입니다.</td>
-                <td>2022.04.13</td>
-                <td>0</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>제목입니다.</td>
-                <td>2022.04.13</td>
-                <td>0</td>
-            </tr>
+            <c:choose>
+            	<c:when test="${empty list }">
+            		<tr>
+            			<td colspan="5" style="text-align: center">조회된 결과가 없습니다.</td>
+            		</tr>
+            	</c:when>
+            	<c:otherwise>
+            		<c:forEach var="b" items="${list }">
+	            		<tr>
+			                <td>${b.boardNo }</td>
+			                <td>${b.boardTitle }</td>
+			                <td>
+			                	${b.enrollDate }
+			                </td>
+			                <td>${b.count }</td>
+	            		</tr>
+            		</c:forEach>
+            	</c:otherwise>
+            </c:choose>
+           
         </table>
 
         <br><br>
-
-        <div class="paging" align="center">
-            <a href="">1</a>
-            <a href="">2</a>
-            <a href="">3</a>
-        </div>
+		<c:choose>
+			<c:when test="${!empty contion && !empty keyword }">
+				<div class="paging" align="center">
+					<ul>
+						<c:if test="${pageMaker.prev }">
+							<li>
+								<a href="list.do${pageMaker.makeQuery(pageMaker.startPage -1)}&conditon=${condtion}&keyword=${keyword}" class="previous">&lt;</a>
+							</li>
+						</c:if>
+						
+						<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="index">
+							<button type="button" onclick="location.href='list.do${pageMaker.makeQuery(index)}&condition=${condition }&keyword=${keyword }'"
+							class="btn btn-default" ${(pageMaker.cir.page==index)?'disabled':'' }>${index }</button>
+						</c:forEach>
+						
+						<c:if test="${pageMaker.next }">
+			                <li>
+			                    <a href="list.do${pageMaker.makeQuery(pageMaker.endPage + 1)}&type=${type}&keyword=${keyword}" class="next">&gt; </a>
+			                </li>
+		            	</c:if>  
+					</ul>
+				</div>
+			</c:when>
+			
+			<c:otherwise>
+				 <div class="paging" align="center">
+				 	<ul>
+				 		<c:if test="${pageMaker.prev}">
+				 			<li>
+				 				<a href="list.do${pageMaker.makeQuery(pageMaker.startPage-1) }" class="previous">&lt;</a>
+				 			</li>
+				 		</c:if>
+				 		
+				 		<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="index">
+			            	<button type="button" onclick="location.href='list.do${pageMaker.makeQuery(index) }'" 
+			            		class="btn btn-default" ${(pageMaker.cri.page==index)?'disabled':''}>${index }</button>
+		            	</c:forEach>
+		            	
+		            	<c:if test="${pageMaker.next }">
+			                <li>
+			                    <a href="list.do${pageMaker.makeQuery(pageMaker.endPage + 1)}&type=${type}&keyword=${keyword}" class="next">&gt; </a>
+			                </li>
+		            	</c:if>  
+				 	</ul>
+        		 </div>
+			</c:otherwise>
+		</c:choose>
+       
 
         <br><br>
-
-        <div class="search" align="center">
-            <select name="" id="">
-                <option value="">ì ëª©</option>
-                <option value="">ê¸ë´ì©</option>
-            </select>
-
-            <input type="text"> &nbsp;
-            <button type="submit">ê²ì</button>
-        </div>
-        
+		<form action="list.do">
+	        <div class="search" align="center">
+	            <select name="condition" id="">
+	                <option value="board_title">제목</option>
+	                <option value="board_content">글내용</option>
+	            </select>
+	
+	            <input type="text" name="keyword"> &nbsp;
+	            <button type="submit">확인</button>
+	        </div>
+        </form>
         <script>
 
         </script>
