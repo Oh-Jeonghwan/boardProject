@@ -67,7 +67,7 @@
     <br>
     <div class="wrap">
         <div class="contentTable">
-            <!-- ~~1: ë¼ë²¨, ~~2: ë´ì© -->
+            <!-- ~~1: 캡션, ~~2: 내용 -->
             <div class="firstLine">
                 <div class="contentNumber">
                     <div class="number1">
