@@ -74,8 +74,7 @@ public class BoardController {
 	
 	@PostMapping("/insert.do")
 	public String insertBoard(@ModelAttribute Board board) {
-		
-		System.out.println(board);
+		int insert = boardService.insertBoard(board);
 		
 		return "boardList";
 	}
