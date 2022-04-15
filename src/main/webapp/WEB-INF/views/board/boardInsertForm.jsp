@@ -12,21 +12,27 @@
             width:1000px;
             margin:auto;
         }
+        
+        textarea{
+        	resize:none;
+        	width:830px;
+        	height:500px;
+        }
     </style>
 </head>
 <body>
     <h1 align="center">글 작성</h1>
     <br>
     <div class="content">
-        <form action="">
-            <span>제목: </span> <input type="text">
+        <form action="insert.do" method="post">
+            <span>제목: </span> <input type="text" name="boardTitle">
             <br><br>
-            <span>작성자: </span> <input type="text">
+            <span>작성자: </span> <input type="text" name="boardWriter">
             
             <br><br>
 
             <span>글내용</span><br>
-            <textarea>
+            <textarea name="boardContent" id="boardContent">
             </textarea>
 
             <br><br>

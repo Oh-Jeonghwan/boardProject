@@ -11,4 +11,6 @@ public interface BoardDao {
 
 	int totalCount(Map<String, Object> param);
 
+	int insertBoard(Board board);
+
 }

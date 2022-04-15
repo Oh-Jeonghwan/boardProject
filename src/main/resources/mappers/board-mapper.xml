@@ -34,4 +34,8 @@
 		</if>
   	 </select>
   	 
+  	 <insert id="insertBoard">
+  	 	
+  	 </insert>
+  	 
   </mapper>

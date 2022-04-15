@@ -9,12 +9,14 @@ public class Board {
 	private String boardWriter;//	    BOARD_WRITER VARCHAR2(100) NOT NULL,
 	private int count;//	    COUNT NUMBER DEFAULT 0,
 	private Date enrollDate;//	    ENROLL_DATE DATE DEFAULT SYSDATE
+	private String status;
 	
 	public Board() {
 		super();
 	}
 
-	public Board(int boardNo, String boardTitle, String boardContent, String boardWriter, int count, Date enrollDate) {
+	public Board(int boardNo, String boardTitle, String boardContent, String boardWriter, int count, Date enrollDate,
+			String status) {
 		super();
 		this.boardNo = boardNo;
 		this.boardTitle = boardTitle;
@@ -22,6 +24,7 @@ public class Board {
 		this.boardWriter = boardWriter;
 		this.count = count;
 		this.enrollDate = enrollDate;
+		this.status = status;
 	}
 
 	public int getBoardNo() {
@@ -72,11 +75,21 @@ public class Board {
 		this.enrollDate = enrollDate;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	@Override
 	public String toString() {
 		return "Board [boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
-				+ ", boardWriter=" + boardWriter + ", count=" + count + ", enrollDate=" + enrollDate + "]";
+				+ ", boardWriter=" + boardWriter + ", count=" + count + ", enrollDate=" + enrollDate + ", status="
+				+ status + "]";
 	}
+	
 	
 	
 }

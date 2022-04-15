@@ -39,7 +39,10 @@
        		display:inline-block; 
         }
         
-        
+        .insert{
+            margin-right:30px;
+        	float:right;
+        }
     </style>
 </head>
 <body>
@@ -124,6 +127,10 @@
 			</c:otherwise>
 		</c:choose>
        
+        <br>
+        <div class="insert">
+        	<button onclick="location.href='insert.do'">글쓰기</button>
+        </div>
 
         <br><br>
 		<form action="list.do">
@@ -134,11 +141,12 @@
 	            </select>
 	
 	            <input type="text" name="keyword"> &nbsp;
-	            <button type="submit">확인</button>
+	            <button type="submit">확인</button>
 	        </div>
         </form>
+        
         <script>
-
+			
         </script>
     </div>
     <br><br><br><br>

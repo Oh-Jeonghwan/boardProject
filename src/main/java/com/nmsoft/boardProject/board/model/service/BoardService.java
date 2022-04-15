@@ -13,5 +13,7 @@ public interface BoardService {
 
 	int totalCount(Map<String, Object> param);
 
+	int insertBoard(Board board);
+
 
 }
