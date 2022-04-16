@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -63,15 +65,17 @@ public class BoardController {
 		model.addAttribute("pageMaker",pageMaker);
 		model.addAttribute("list",list);
 		
-		System.out.println(pageMaker.getStartPage());
+		System.out.println("startPage: "+pageMaker.getStartPage());
 		return "board/boardList";
 	}
 	
+	//인서트 폼을 띄워주는 메소드(오버로딩)
 	@GetMapping("/insert.do")
 	public String insertBoard() {
 		return "board/boardInsertForm";
 	}
 	
+	//인서트 요청을 처리하는 메소드(오버로딩)
 	@PostMapping("/insert.do")
 	public String insertBoard(@ModelAttribute Board board) {
 		int insert = boardService.insertBoard(board);
@@ -84,5 +88,71 @@ public class BoardController {
 		}
 		
 	}
+	
+	//게시글 상세조회
+	@GetMapping("/content.do")
+	public String boardContent(@RequestParam int bno
+							 , Model model
+							 , HttpSession session) {
+		
+		int result = boardService.increaseCount(bno);
+		
+		Board b = new Board();
+		
+		if(result>0) {
+			b = boardService.boardContent(bno);
+		}
+		
+		if(b != null) {
+			 model.addAttribute("board",b);
+			return "board/boardContent";
+		}
+		else {
+			return "redirect:list.do";
+		}
+	}
+	
+	//수정 폼을 띄워주는 메소드
+	@GetMapping("/contentEdit.do")
+	public String boardContent(@RequestParam int bno
+							 , HttpSession session) {
+		
+		Board b = boardService.boardContent(bno);
+		
+		if(b != null) {
+			session.setAttribute("board", b);
+			return "board/boardEdit";
+		}
+		else {
+			return "redirect:content.do";
+		}
+	}
+	
+	//게시글 수정 요청을 처리하는 메소드
+	@PostMapping("/contentEdit.do")
+	public String boardContent(@ModelAttribute Board b) {
+		int result = boardService.contentEdit(b);
+		
+		if(result>0) {
+			return "redirect:content.do?bno="+b.getBoardNo();
+		}
+		else {
+			return "redirect:content.do?bno="+b.getBoardNo();
+		}
+	}
+	
+	@GetMapping("/delete.do")
+	public String boardDelete(@RequestParam int bno) {
+		int result = boardService.boardDelete(bno);
+		
+		if(result>0) {
+			return "redirect:list.do?page=1";
+		}
+		else {
+			return "redirect:content.do?bno="+bno;
+		}
+		
+	}
+	
 	
 }

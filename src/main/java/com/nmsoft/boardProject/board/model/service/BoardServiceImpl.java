@@ -28,6 +28,24 @@ public class BoardServiceImpl implements BoardService{
 	public int insertBoard(Board board) {
 		return boardDao.insertBoard(board);
 	}
+	
+	@Override
+	public int increaseCount(int bno) {
+		return boardDao.increaseCount(bno);
+	}
 
+	@Override
+	public Board boardContent(int bno) {
+		return boardDao.boardContent(bno);
+	}
 
+	@Override
+	public int contentEdit(Board b) {
+		return boardDao.contentEdit(b);
+	}
+
+	@Override
+	public int boardDelete(int bno) {
+		return boardDao.boardDelete(bno);
+	}
 }

@@ -9,6 +9,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BoardList</title>
+    
+    <!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	
+	<!-- Latest compiled and minified CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"></script>
+   
     <style>
         div{
             border:1px black solid;
@@ -49,7 +61,7 @@
     <h1 align="center">게시글 목록</h1>
     <br>
     <div class="wrap">
-        <table class="board">
+        <table class="table">
             <tr>
                 <th style="width:50px;">글번호</th>
                 <th style="width:600px;">제목</th>
@@ -91,7 +103,7 @@
 						
 						<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="index">
 							<button type="button" onclick="location.href='list.do${pageMaker.makeQuery(index)}&condition=${condition }&keyword=${keyword }'"
-							class="btn btn-default" ${(pageMaker.cir.page==index)?'disabled':'' }>${index }</button>
+							class="btn btn-default" ${(pageMaker.cri.page==index)?'disabled':'' }>${index }</button>
 						</c:forEach>
 						
 						<c:if test="${pageMaker.next }">
@@ -146,7 +158,15 @@
         </form>
         
         <script>
-			
+	        $(function(){
+				$(".table tr").click(function(){
+					var bno = $(this).children().eq(0).text();
+					
+					if(bno!="글번호"){
+						location.href="${pageContext.request.contextPath}/board/content.do?bno="+bno;
+					}
+				});
+			});
         </script>
     </div>
     <br><br><br><br>

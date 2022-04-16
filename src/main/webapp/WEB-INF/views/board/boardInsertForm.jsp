@@ -7,10 +7,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BoardInsertForm</title>
+    <!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	
+	<!-- Latest compiled and minified CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"></script>
+	
+	<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script> 
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/nse_files/js/HuskyEZCreator.js" charset="utf-8"></script>
     <style>
         body{
             width:1000px;
             margin:auto;
+        }
+        
+        .content{
+        	margin: auto;
         }
         
         textarea{
@@ -18,6 +35,7 @@
         	width:830px;
         	height:500px;
         }
+        
     </style>
 </head>
 <body>
@@ -36,12 +54,37 @@
             </textarea>
 
             <br><br>
-
-            <!--버튼으로 할지 a태그로 할지 결정 -->
-            <button type="submit">등록</button>
-            <button>취소</button>
+            
+			<div class="button" align="right">
+	            <!--버튼으로 할지 a태그로 할지 결정 -->
+	            <button id="submitModifyBoardBtn">등록</button>
+	            <button type="button" onclick="location.href='${pageContext.request.contextPath}/board/list.do?page=1'">취소</button>
+        	</div>
         </form>
     </div>
     <br><br><br><br>
+    <script>
+	 	var oEditors = []; // 개발되어 있는 소스에 맞추느라, 전역변수로 사용하였지만, 지역변수로 사용해도 전혀 무관 함.
+		$(function() { 
+		
+			// Editor Setting 
+			nhn.husky.EZCreator.createInIFrame({ oAppRef : oEditors, // 전역변수 명과 동일해야 함. 
+				elPlaceHolder : "boardContent", // 에디터가 그려질 textarea ID 값과 동일 해야 함. 
+				sSkinURI : "${pageContext.request.contextPath}/resources/nse_files/SmartEditor2Skin.html", // Editor HTML 
+				fCreator : "createSEditor2", // SE2BasicCreator.js 메소드명이니 변경 금지 X 
+				htParams : { 
+					// 툴바 사용 여부 (true:사용/ false:사용하지 않음) 
+					bUseToolbar : true, 
+					// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음) 
+					bUseVerticalResizer : true, 
+					// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음) 
+					bUseModeChanger : true, } });
+		});
+		
+	 	//텍스트에어리어의 값을 받아오는 함수
+		$("#submitModifyBoardBtn").click(function() {
+			oEditors.getById["boardContent"].exec("UPDATE_CONTENTS_FIELD", []);
+			});
+	</script>
 </body>
 </html>

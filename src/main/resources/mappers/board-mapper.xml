@@ -48,8 +48,33 @@
 			 , #{boardWriter} 
 			 , DEFAULT
 			 , DEFAULT
-			 , DEFAULT
-			 )
+			 , DEFAULT)
   	 </insert>
   	 
+  	 <update id="increaseCount" parameterType="int">
+  	 	UPDATE BOARD 
+  	 	SET COUNT = COUNT+1
+  	 	WHERE BOARD_NO = #{bno}
+  	 </update>
+  	 
+  	 <select id="boardContent" parameterType="int" resultType="board">
+  	 	SELECT *
+  	 	FROM BOARD
+  	 	WHERE STATUS = 'Y'
+  	 	AND BOARD_NO = #{boardNo}
+  	 </select>
+ 
+  	 <update id="contentEdit" parameterType="board">
+  	 	UPDATE BOARD
+  	 	SET BOARD_TITLE = #{boardTitle},
+  	 		BOARD_WRITER = #{boardWriter},
+  	 		BOARD_CONTENT = #{boardContent}
+  	 	WHERE BOARD_NO = #{boardNo}
+  	 </update>
+  	 
+  	 <update id="boardDelete" parameterType="int">
+  	 	UPDATE BOARD
+  	 	SET STATUS='N'
+  	 	WHERE BOARD_NO = #{bno}
+  	 </update>
   </mapper>

@@ -23,10 +23,29 @@ public class BoardDaoImpl implements BoardDao{
 	public int totalCount(Map<String, Object> param) {
 		return sqlSession.selectOne("board.totalCount",param);
 	}
-
+	
 	@Override
 	public int insertBoard(Board board) {
 		return sqlSession.insert("board.insertBoard", board);
 	}
 
+	@Override
+	public int increaseCount(int bno) {
+		return sqlSession.update("board.increaseCount",bno);
+	}
+	
+	@Override
+	public Board boardContent(int bno) {
+		return sqlSession.selectOne("board.boardContent",bno);
+	}
+
+	@Override
+	public int contentEdit(Board b) {
+		return sqlSession.update("board.contentEdit",b);
+	}
+
+	@Override
+	public int boardDelete(int bno) {
+		return sqlSession.update("board.boardDelete",bno);
+	}
 }

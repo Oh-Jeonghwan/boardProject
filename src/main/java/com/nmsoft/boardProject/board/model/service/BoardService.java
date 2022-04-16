@@ -3,8 +3,6 @@ package com.nmsoft.boardProject.board.model.service;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.stereotype.Service;
-
 import com.nmsoft.boardProject.board.model.vo.Board;
 
 public interface BoardService {
@@ -14,6 +12,16 @@ public interface BoardService {
 	int totalCount(Map<String, Object> param);
 
 	int insertBoard(Board board);
+	
+	int increaseCount(int bno);
+
+	Board boardContent(int bno);
+
+	int contentEdit(Board b);
+
+	int boardDelete(int bno);
+
+	
 
 
 }
