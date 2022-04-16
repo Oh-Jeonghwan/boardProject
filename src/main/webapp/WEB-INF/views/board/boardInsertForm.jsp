@@ -25,14 +25,14 @@
     <br>
     <div class="content">
         <form action="insert.do" method="post">
-            <span>제목: </span> <input type="text" name="boardTitle">
+            <span>제목: </span> <input type="text" name="boardTitle" required>
             <br><br>
-            <span>작성자: </span> <input type="text" name="boardWriter">
+            <span>작성자: </span> <input type="text" name="boardWriter" required>
             
             <br><br>
 
             <span>글내용</span><br>
-            <textarea name="boardContent" id="boardContent">
+            <textarea name="boardContent" id="boardContent" required>
             </textarea>
 
             <br><br>

@@ -76,7 +76,13 @@ public class BoardController {
 	public String insertBoard(@ModelAttribute Board board) {
 		int insert = boardService.insertBoard(board);
 		
-		return "boardList";
+		if(insert>0) {
+			return "redirect:list.do";
+		}
+		else {
+			return "redirect:insert.do";
+		}
+		
 	}
 	
 }

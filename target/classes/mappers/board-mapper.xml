@@ -34,8 +34,22 @@
 		</if>
   	 </select>
   	 
-  	 <insert id="insertBoard">
-  	 	
+  	 <insert id="insertBoard" parameterType="board">
+  	 	INSERT INTO BOARD(BOARD_NO
+               		    , BOARD_TITLE
+               		    , BOARD_CONTENT
+               		    , BOARD_WRITER
+              		    , COUNT
+              		    , ENROLL_DATE
+             		    , STATUS)
+		VALUES(BNO_SEQ.NEXTVAL
+			 , #{boardTitle}
+			 , #{boardContent}
+			 , #{boardWriter} 
+			 , DEFAULT
+			 , DEFAULT
+			 , DEFAULT
+			 )
   	 </insert>
   	 
   </mapper>
