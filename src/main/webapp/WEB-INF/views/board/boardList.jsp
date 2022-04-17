@@ -23,7 +23,6 @@
    
     <style>
         div{
-            border:1px black solid;
             margin: auto;
         }
 
@@ -36,6 +35,11 @@
             border:1px black solid;
             width:100%;
         }
+        
+        tbody>tr:hover{
+			cursor: pointer;
+	        opacity: 0.7;
+		}
 
         td{
             padding:10px;
@@ -45,6 +49,10 @@
         	list-style: none;
         	padding-left: 0px;
         	display:inline-block;
+        	text-align:center;
+        	width:500px;
+        	margin-left: auto;
+        	margin-right: auto;
         }
         
         ul li{
@@ -58,46 +66,55 @@
     </style>
 </head>
 <body>
+	<div id="header">
+       <jsp:include page="../../../index.jsp"></jsp:include>
+    </div>
+	<br><br>
     <h1 align="center">게시글 목록</h1>
     <br>
     <div class="wrap">
-        <table class="table">
-            <tr>
-                <th style="width:50px;">글번호</th>
-                <th style="width:600px;">제목</th>
-                <th style="width:10%;">날짜</th>
-                <th style="width:50px;">조회수</th>
-            </tr>
-            <c:choose>
-            	<c:when test="${empty list }">
-            		<tr>
-            			<td colspan="5" style="text-align: center">조회된 결과가 없습니다.</td>
-            		</tr>
-            	</c:when>
-            	<c:otherwise>
-            		<c:forEach var="b" items="${list }">
+        <table class="table table-hover">
+        	<thead>
+	            <tr>
+	                <th style="width:100px;">글번호</th>
+	                <th style="width:600px;">제목</th>
+	                <th style="width:20%;">날짜</th>
+	                <th style="width:100px;">조회수</th>
+	            </tr>
+            </thead>
+            <tbody>
+	            <c:choose>
+	            	<c:when test="${empty list }">
 	            		<tr>
-			                <td>${b.boardNo }</td>
-			                <td>${b.boardTitle }</td>
-			                <td>
-			                	${b.enrollDate }
-			                </td>
-			                <td>${b.count }</td>
+	            			<td colspan="5" style="text-align: center">조회된 결과가 없습니다.</td>
 	            		</tr>
-            		</c:forEach>
-            	</c:otherwise>
-            </c:choose>
-           
+	            	</c:when>
+	            	<c:otherwise>
+	            		<c:forEach var="b" items="${list }">
+		            		<tr>
+				                <td>${b.boardNo }</td>
+				                <td>${b.boardTitle }</td>
+				                <td>
+				                	<fmt:setLocale value="en_US" scope="session"/>
+				                	<fmt:parseDate value="${b.enrollDate}" var="eDate" pattern="EEE MMM d HH:mm:ss z yyyy"/>
+									<fmt:formatDate value="${eDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+				                </td>
+				                <td>${b.count }</td>
+		            		</tr>
+	            		</c:forEach>
+	            	</c:otherwise>
+	           </c:choose>
+           </tbody>
         </table>
 
         <br><br>
 		<c:choose>
-			<c:when test="${!empty contion && !empty keyword }">
+			<c:when test="${!empty condition && !empty keyword }">
 				<div class="paging" align="center">
-					<ul>
+					<ul class="pagination">
 						<c:if test="${pageMaker.prev }">
-							<li>
-								<a href="list.do${pageMaker.makeQuery(pageMaker.startPage -1)}&conditon=${condtion}&keyword=${keyword}" class="previous">&lt;</a>
+							<li class="page-item">
+								<a class="page-link" href="list.do${pageMaker.makeQuery(pageMaker.startPage -1)}&conditon=${condtion}&keyword=${keyword}" class="previous">이전</a>
 							</li>
 						</c:if>
 						
@@ -107,8 +124,8 @@
 						</c:forEach>
 						
 						<c:if test="${pageMaker.next }">
-			                <li>
-			                    <a href="list.do${pageMaker.makeQuery(pageMaker.endPage + 1)}&type=${type}&keyword=${keyword}" class="next">&gt; </a>
+			                <li class="page-item">
+			                    <a class="page-link" href="list.do${pageMaker.makeQuery(pageMaker.endPage + 1)}&type=${type}&keyword=${keyword}" class="next">다음 </a>
 			                </li>
 		            	</c:if>  
 					</ul>
@@ -117,10 +134,10 @@
 			
 			<c:otherwise>
 				 <div class="paging" align="center">
-				 	<ul>
+				 	<ul class="pagination">
 				 		<c:if test="${pageMaker.prev}">
-				 			<li>
-				 				<a href="list.do${pageMaker.makeQuery(pageMaker.startPage-1) }" class="previous">&lt;</a>
+				 			<li class="page-item">
+				 				<a class="page-link" href="list.do${pageMaker.makeQuery(pageMaker.startPage-1) }" class="previous">이전</a>
 				 			</li>
 				 		</c:if>
 				 		
@@ -130,15 +147,14 @@
 		            	</c:forEach>
 		            	
 		            	<c:if test="${pageMaker.next }">
-			                <li>
-			                    <a href="list.do${pageMaker.makeQuery(pageMaker.endPage + 1)}&type=${type}&keyword=${keyword}" class="next">&gt; </a>
+			                <li class="page-item">
+			                    <a class="page-link" href="list.do${pageMaker.makeQuery(pageMaker.endPage + 1)}&type=${type}&keyword=${keyword}" class="next">다음 </a>
 			                </li>
 		            	</c:if>  
 				 	</ul>
         		 </div>
 			</c:otherwise>
 		</c:choose>
-       
         <br>
         <div class="insert">
         	<button onclick="location.href='insert.do'">글쓰기</button>

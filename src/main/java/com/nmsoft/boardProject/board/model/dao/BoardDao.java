@@ -4,12 +4,13 @@ import java.util.List;
 import java.util.Map;
 
 import com.nmsoft.boardProject.board.model.vo.Board;
+import com.nmsoft.boardProject.board.model.vo.Search;
 
 public interface BoardDao {
 
-	List<Board> selectList(Map<String, Object> param);
+	List<Board> selectList(Search s);
 
-	int totalCount(Map<String, Object> param);
+	int totalCount(Search s);
 
 	int insertBoard(Board board);
 

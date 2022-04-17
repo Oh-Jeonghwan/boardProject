@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.nmsoft.boardProject.board.model.dao.BoardDao;
 import com.nmsoft.boardProject.board.model.vo.Board;
+import com.nmsoft.boardProject.board.model.vo.Search;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -15,13 +16,13 @@ public class BoardServiceImpl implements BoardService{
 	private BoardDao boardDao;
 
 	@Override
-	public List<Board> selectList(Map<String, Object> param) {
-		return boardDao.selectList(param);
+	public List<Board> selectList(Search s) {
+		return boardDao.selectList(s);
 	}
 
 	@Override
-	public int totalCount(Map<String, Object> param) {
-		return boardDao.totalCount(param);
+	public int totalCount(Search s) {
+		return boardDao.totalCount(s);
 	}
 
 	@Override
@@ -48,4 +49,5 @@ public class BoardServiceImpl implements BoardService{
 	public int boardDelete(int bno) {
 		return boardDao.boardDelete(bno);
 	}
+
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.nmsoft.boardProject.board.model.vo.Board;
+import com.nmsoft.boardProject.board.model.vo.Search;
 
 @Repository
 public class BoardDaoImpl implements BoardDao{
@@ -15,13 +16,13 @@ public class BoardDaoImpl implements BoardDao{
 	private SqlSession sqlSession;
 
 	@Override
-	public List<Board> selectList(Map<String, Object> param) {
-		return sqlSession.selectList("board.selectList",param);
+	public List<Board> selectList(Search s) {
+		return sqlSession.selectList("board.selectList",s);
 	}
 
 	@Override
-	public int totalCount(Map<String, Object> param) {
-		return sqlSession.selectOne("board.totalCount",param);
+	public int totalCount(Search s) {
+		return sqlSession.selectOne("board.totalCount",s);
 	}
 	
 	@Override

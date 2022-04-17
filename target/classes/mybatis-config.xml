@@ -35,6 +35,7 @@
   <typeAliases>
   	<!--<typeAlias alias="별칭" type="vo파일 경로"></typeAlias>  -->
   	<typeAlias alias="board" type="com.nmsoft.boardProject.board.model.vo.Board"></typeAlias>
- 	
+ 	<typeAlias alias="search" type="com.nmsoft.boardProject.board.model.vo.Search"></typeAlias>
+  	<typeAlias alias="member" type="com.nmsoft.boardProject.member.model.vo.Member"></typeAlias>
   </typeAliases>
 </configuration>

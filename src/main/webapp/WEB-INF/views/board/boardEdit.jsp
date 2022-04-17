@@ -7,18 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BoardInsertForm</title>
-    
-    <!-- jQuery library -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	
-	<!-- Latest compiled and minified CSS -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-	
-	<!-- Latest compiled JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"></script>
-    
     <style>
         body{
             width:1000px;
@@ -27,29 +15,29 @@
         
         textarea{
         	resize:none;
-        	width:830px;
+        	width:990px;
         	height:500px;
         }
         
         .content{
         	margin: auto;
         }
-        
+        #boardWriter{width:400px;}
     </style>
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script> 
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/nse_files/js/HuskyEZCreator.js" charset="utf-8"></script>
 </head>
 <body>
+	<div id="header">
+       <jsp:include page="../../../index.jsp"></jsp:include>
+    </div>
+	<br><br>
     <h1 align="center">글 작성</h1>
     <br>
     <div class="content">
         <form action="contentEdit.do?boardNo=${board.boardNo }" method="post">
-            <span>제목: </span> <input type="text" name="boardTitle" value=${board.boardTitle } required>
-            <br><br>
-            <span>작성자: </span> <input type="text" name="boardWriter" value=${board.boardWriter } required>
-            
-            <br><br>
-
+            <span>제목: </span> <input type="text" name="boardTitle" class="form-control" value=${board.boardTitle } required>
+            <br>
             <span>글내용</span><br>
             <textarea name="boardContent" id="boardContent">
             ${board.boardContent }

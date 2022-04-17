@@ -12,7 +12,7 @@
   	 					즉, 자바 메소드에서의 매개변수와 비슷한 의미
   	 					채울 필요가 없으면 생략 가능
   	  -->
-  	 <select id="selectList" parameterType="map" resultType="board">
+  	 <select id="selectList" parameterType="search" resultType="board">
   	 	SELECT *
   	 	FROM (SELECT ROWNUM RNUM, A.*
   	 		  FROM(SELECT *
@@ -25,7 +25,7 @@
   	 	WHERE RNUM BETWEEN #{pageStart} AND #{perPageNum}
   	 </select>
   	 
-  	 <select id="totalCount" parameterType="map" resultType="int">
+  	 <select id="totalCount" parameterType="search" resultType="int">
   	 	SELECT COUNT(*)
   	 	FROM BOARD
 	  	WHERE STATUS='Y' 

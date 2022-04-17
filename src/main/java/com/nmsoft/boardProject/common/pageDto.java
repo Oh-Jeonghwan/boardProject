@@ -13,7 +13,7 @@ public class pageDto {
 	private boolean prev; //이전 버튼을 누를 수 있는 경우와 없는 경우 분류
 	private boolean next;
 	
-	private int displayPageNum = 9; //화면 하단에 보여지는 페이지 개수
+	private int displayPageNum = 10; //화면 하단에 보여지는 페이지 개수
 	private int tempEndPage;
 	
 	public void setTotalCount(int totalCount) {
@@ -23,10 +23,15 @@ public class pageDto {
 	}
 	
 	private void calcData() {
-		endPage = (int)(Math.ceil(totalCount/(double)cri.getPerPageNum()));
+		//해당 페이지의 마지막 페이지 = 올림(현재 페이지/화면 하나에 보여지는 페이지 개수)*화면 하나에 보여지는 페이지 개수
+		endPage = (int)(Math.ceil(cri.getPage()/(double)displayPageNum)*displayPageNum);
+		//해당 페이지의 마지막 페이지 = 올림(총게시글수/페이지당 보여줄 게시글 수)
+		//endPage = (int)(Math.ceil(totalCount/(double)cri.getPerPageNum()));
 		
+		//해당 페이지의 시작 페이지 = (마지막 페이지 - 보여줄패이지개수) + 1
 		startPage = (endPage-displayPageNum)+1;
 		
+		//= 올림(총 게시글 수/페이지당 보여줄 게시글 수)
 		int tempEndPage = (int)(Math.ceil(totalCount/(double)cri.getPerPageNum()));
 		
 		if(endPage>tempEndPage) {

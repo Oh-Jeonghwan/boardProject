@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"><!-- xml 파일의 유효성 체크를 위한 부분 -->
+  <mapper namespace="member">
+  	 <!-- 
+  	 	MyBatis 방식 : insert, select, update, delete 태그에
+  	 				id 속성으로 쿼리문을 구분함
+  	 	-id : 쿼리문을 불러오기 위한 키값
+  	 	-parameterType: mybatis-config.xml 에서 typeAlias 에서 지정했던 vo 클래스의 별칭
+  	 					쿼리문을 실행하기 위해 필요한 값을 해당 타입으로 넘겨받아서 그  객체로부터 불러오겠다.
+  	 					즉, 자바 메소드에서의 매개변수와 비슷한 의미
+  	 					채울 필요가 없으면 생략 가능
+  	  -->
+  	 <select id="idCheck" parameterType="string" resultType="int">
+  	 	SELECT COUNT(*)
+  	 	FROM MEMBER
+  	 	WHERE MEMBER_ID=#{id}
+  	 </select>
+  	 
+  	 <insert id="join" parameterType="member">
+  	 	INSERT INTO MEMBER(MEMBER_ID
+               		    , MEMBER_PWD
+               		    , POST
+               		    , BASE_ADDR
+              		    , EXTRA_ADDR
+             		    , BIRTH
+             		    , PHONE
+             		    , ENROLL_DATE)
+		VALUES(#{memberId}
+			 , #{memberPwd}
+			 , #{post} 
+			 , #{baseAddr}
+			 , #{extraAddr}
+			 , #{birthDate}
+			 , #{phone}
+			 , DEFAULT)
+  	 </insert>
+  	 
+  	 <select id="selectMember" parameterType="member" resultType="member">
+  	 	SELECT *
+  	 	FROM MEMBER
+  	 	WHERE MEMBER_ID = #{memberId}
+  	 	AND MEMBER_PWD = #{memberPwd}
+  	 </select>
+  	 
+  </mapper>
