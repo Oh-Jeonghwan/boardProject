@@ -126,6 +126,9 @@ public class BoardController {
 	@GetMapping("/contentEdit.do")
 	public String boardContent(@RequestParam int bno
 							 , HttpSession session) {
+		System.out.println(bno);
+		
+		//return "board/boardEdit";
 		
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		
@@ -144,7 +147,8 @@ public class BoardController {
 		else{
 			session.setAttribute("board", b);
 			return "board/boardEdit";
-		}	
+		}
+		
 	}
 	
 	//게시글 수정 요청을 처리하는 메소드

@@ -17,4 +17,5 @@ public class Board {
 	private int count;//	    COUNT NUMBER DEFAULT 0,
 	private Date enrollDate;//	    ENROLL_DATE DATE DEFAULT SYSDATE
 	private String status;
+
 }

@@ -17,7 +17,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"></script>
 
-	<style type="text/css">
+	<style>
 		.login{float:right;}
 		
 		#user-info {float:right;}

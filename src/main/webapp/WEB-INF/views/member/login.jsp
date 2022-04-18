@@ -31,8 +31,8 @@
 			아이디: <input type="text" name="memberId"><br><br>
 			비밀번호:	<input type="password" name="memberPwd"><br><br>
 			
-			<button type="button" onclick="location.href='${pageContext.request.contextPath}/member/join.do'">회원가입</button>
-			&nbsp;&nbsp;<button type="submit">로그인</button>
+			<button type="button"  class="btn btn-info" onclick="location.href='${pageContext.request.contextPath}/member/join.do'">회원가입</button>
+			&nbsp;&nbsp;<button type="submit"  class="btn btn-success">로그인</button>
 		</form>
 	</div>
 </body>
