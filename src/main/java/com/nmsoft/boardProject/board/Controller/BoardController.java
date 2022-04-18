@@ -150,6 +150,7 @@ public class BoardController {
 	//게시글 수정 요청을 처리하는 메소드
 	@PostMapping("/contentEdit.do")
 	public String boardContent(@ModelAttribute Board b) {
+		
 		int result = boardService.contentEdit(b);
 		
 		if(result>0) {

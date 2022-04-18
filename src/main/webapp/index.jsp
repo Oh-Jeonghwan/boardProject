@@ -18,14 +18,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"></script>
 
 	<style type="text/css">
-		#login_form_etc>a{
-			text-decoration: none;
-			color: gray;
-			margin: 15px;
-			font-size: 12px;
-			vertical-align: middle; 
-		}
-		.login-form,#user-info {float:right;}
+		.login{float:right;}
+		
+		#user-info {float:right;}
+		
 	    #user-info a{
 	        text-decoration: none;
 	        color: black;
@@ -69,7 +65,7 @@
 	<br>
 	
 	<br><br>
-	<div class="login">
+	<div class="login btn-group">
 			<c:choose>
 				<c:when test="${ !empty loginUser }"><!-- 로그인 되었을때 -->
 					<div id="user-info">
@@ -81,21 +77,21 @@
 					<br>
 				</c:when>
 				<c:otherwise><!-- 로그인이 안되었다면 -->
-					<div class="login_form" align="right">
+					<div class="login_form">
 						<table>    
 							<tr>
 								<th colspan="2">
 									<br>
-									<button type="button"onclick="location.href='${pageContext.request.contextPath}/member/login.do'">로그인</button>
-									<button type="button" onclick="location.href='${pageContext.request.contextPath}/member/join.do'">회원가입</button>
+									<button class="btn btn-success" type="button"onclick="location.href='${pageContext.request.contextPath}/member/login.do'">로그인</button>
+									<button class="btn btn-info" type="button" onclick="location.href='${pageContext.request.contextPath}/member/join.do'">회원가입</button>
 								</th>
 							</tr>
 						</table>
-						 
 					</div>					
 				</c:otherwise>
 			</c:choose>
 		</div>
+		<br>
 		<br>
     	<br>
 		<div class="nav-area" align="center">

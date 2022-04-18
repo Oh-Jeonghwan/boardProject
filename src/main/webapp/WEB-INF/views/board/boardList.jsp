@@ -157,7 +157,7 @@
 		</c:choose>
         <br>
         <div class="insert">
-        	<button onclick="location.href='insert.do'">글쓰기</button>
+        	<button class="btn btn-success" onclick="location.href='insert.do'">글쓰기</button>
         </div>
 
         <br><br>
@@ -169,7 +169,7 @@
 	            </select>
 	
 	            <input type="text" name="keyword"> &nbsp;
-	            <button type="submit">확인</button>
+	            <button class = "btn btn-success" type="submit">확인</button>
 	        </div>
         </form>
         

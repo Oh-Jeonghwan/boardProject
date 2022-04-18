@@ -48,8 +48,8 @@
             
 			<div class="button" align="right">
 	            <!--버튼으로 할지 a태그로 할지 결정 -->
-	            <button id="submitModifyBoardBtn">등록</button>
-	            <button type="button" onclick="location.href='${pageContext.request.contextPath}/board/list.do?page=1'">취소</button>
+	            <button class="btn btn-success" id="submitModifyBoardBtn">등록</button>
+	            <button class="btn btn-danger" type="button" onclick="location.href='${pageContext.request.contextPath}/board/list.do?page=1'">취소</button>
         	</div>
         </form>
     </div>

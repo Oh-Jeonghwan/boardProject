@@ -47,8 +47,8 @@
             
 			<div class="button" align="right">
 	            <!--a로할지 버튼으로 할지 결정 -->
-	            <button id="submitModifyBoardBtn">등록</button>
-	            <button type="button" onclick="location.href='${pageContext.request.contextPath}/board/content.do?bno=${board.boardNo }'">취소</button>
+	            <button id="submitModifyBoardBtn" class="btn btn-success">등록</button>
+	            <button class="btn btn-danger" type="button" onclick="location.href='${pageContext.request.contextPath}/board/content.do?bno=${board.boardNo }'">취소</button>
         	</div>
         </form>
     </div>

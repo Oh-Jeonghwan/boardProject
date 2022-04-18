@@ -71,6 +71,11 @@
             text-align: center;
             line-height: 500px;
         }
+        
+        .button{
+        	float: right;
+        }
+        
 
     </style>
 </head>
@@ -113,11 +118,11 @@
         </table>
     </div>
     <br>
-    <div class="button" align="right">
-    	<button type="button" onclick="location.href='${pageContext.request.contextPath}/board/list.do?page=1'">목록가기</button>
+    <div class="button btn-group">
+    	<button class="btn" type="button" onclick="location.href='${pageContext.request.contextPath}/board/list.do?page=1'">목록가기</button>
         <!-- 서브밋이 아닌 기본 버튼을 통한 유알엘 이동은 get 방식으로 넘어감 서블릿에서 get매핑으로 -->
-        <button type="button" onclick="location.href='contentEdit.do?bno=${board.boardNo}'">수정하기</button>
-        <button type="button" onclick="location.href='delete.do?bno=${board.boardNo}&boardWriter=${board.boardWriter}'">삭제하기</button>
+        <button class="btn btn-success" type="button" onclick="location.href='contentEdit.do?bno=${board.boardNo}'">수정하기</button>
+        <button class="btn btn-danger" type="button" onclick="location.href='delete.do?bno=${board.boardNo}&boardWriter=${board.boardWriter}'">삭제하기</button>
     </div>
     <br><br><br><br>
 </body>

@@ -67,7 +67,6 @@
   	 <update id="contentEdit" parameterType="board">
   	 	UPDATE BOARD
   	 	SET BOARD_TITLE = #{boardTitle},
-  	 		BOARD_WRITER = #{boardWriter},
   	 		BOARD_CONTENT = #{boardContent}
   	 	WHERE BOARD_NO = #{boardNo}
   	 </update>
