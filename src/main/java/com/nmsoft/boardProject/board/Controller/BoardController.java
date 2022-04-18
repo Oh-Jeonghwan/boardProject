@@ -133,7 +133,11 @@ public class BoardController {
 		
 		String contentBno = "redirect:content.do?bno=";
 		//로그인정보가 없거나, 글 작성자랑 로그인 유저랑 같지 않을 때
-		if(loginUser == null || loginUser.getMemberId() != b.getBoardWriter()) {
+		if(loginUser == null ) {
+			session.setAttribute("alertMsg", "로그인해 주세요.");
+			return contentBno + bno;
+		}
+		else if(!loginUser.getMemberId().equals(b.getBoardWriter())) {
 			session.setAttribute("alertMsg", "로그인 정보를 확인해 주세요.");
 			return contentBno + bno;
 		}
@@ -165,7 +169,11 @@ public class BoardController {
 		
 		String contentBno = "redirect:content.do?bno=";
 		
-		if(loginUser == null || loginUser.getMemberId() != boardWriter) {
+		if(loginUser == null ) {
+			session.setAttribute("alertMsg", "로그인해 주세요.");
+			return contentBno + bno;
+		}
+		else if(!loginUser.getMemberId().equals(boardWriter)) {
 			
 			session.setAttribute("alertMsg", "로그인 정보를 확인해 주세요.");
 			return contentBno + bno;
