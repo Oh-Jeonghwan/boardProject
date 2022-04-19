@@ -126,9 +126,6 @@ public class BoardController {
 	@GetMapping("/contentEdit.do")
 	public String boardContent(@RequestParam int bno
 							 , HttpSession session) {
-		System.out.println(bno);
-		
-		//return "board/boardEdit";
 		
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		

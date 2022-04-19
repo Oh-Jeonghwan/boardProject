@@ -18,7 +18,6 @@
 	<!-- Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"></script>
     
     <style>
         .contentTable{
@@ -30,48 +29,6 @@
             margin:auto;
         }
 
-        .firstLine div, .secondLine div,
-        .thirdLine div, .forthLine div{
-            
-            display:inline-block;
-            font-size: large;
-        }
-
-        .contentNumber, .contentDate,
-        .contentWriter, .contentCount{
-            width:49%;
-        }
-
-        .contentTitle{
-            width:100%;
-        }
-        
-        .number1, .date1,
-        .writer1, .count1{
-            text-align: center;
-            width:28%;
-        }
-
-        .number2, .date2,
-        .writer2, .count2{
-            width:68%;
-        }
-
-        .title1, .content1{
-            text-align: center;
-            width:138.36px;
-        }
-
-        .title2, .content2{
-            width:85%;
-        }
-
-        .content1{
-            height:500px;
-            text-align: center;
-            line-height: 500px;
-        }
-        
         .button{
         	float: right;
         }
