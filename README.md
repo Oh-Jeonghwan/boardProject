@@ -1,4 +1,15 @@
 # boardProject
+
+# 개발 환경
+
+개발 툴: eclipse 4.15.0, visual code studio 1.66.2, sqlDeveloper 21.2.1.204
+DBMS: Oracle 11.0.14
+언어: JAVA, HTML5, CSS3, JAVA Script, SQL
+프레임 워크: Spring Tools 3.9.14.RELEASE, Bootstrap, MyBatis 3.5.8
+서버: Apache Tomcat 8.5
+
+
+# 스프링 환경설정
 pom.xml 변경사항
 
 ![폼xml 변경 사항1](https://user-images.githubusercontent.com/98066327/163905302-6193a0ca-d046-4296-8d53-0924a7520e49.PNG)
