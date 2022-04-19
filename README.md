@@ -1,1 +1,39 @@
 # boardProject
+pom.xml 변경사항
+
+![폼xml 변경 사항1](https://user-images.githubusercontent.com/98066327/163905302-6193a0ca-d046-4296-8d53-0924a7520e49.PNG)
+
+![폼xml 변경 사항2](https://user-images.githubusercontent.com/98066327/163906261-3f814a93-ad98-40a0-890b-d82c0eb85580.PNG)
+
+- ojdbc.jar 파일 추가(오라클db와 자바를 연결해주는 jar파일)
+- 스프링과 jdbc를 연결해주는 의존성 라이브러리 추가 구문
+- 마이바티스 관련 라이브러리 추가
+- 마이바티스와 스프링을 연결해주는 라이브러리 추가
+- 롬복 라이브러리 추가(등록 후 jar파일 설치 따로 필요)
+- 자바에서 파일 입출력 관리 해주는 commons-io 라이브러리 축
+- 비동기 통신을 위한 json 라이브러리 추가
+
+
+web.xml 변경사항
+
+![web xml 변경사항1](https://user-images.githubusercontent.com/98066327/163906491-ef1c4923-25e5-423f-b681-3bbfa3871945.PNG)
+
+![web xml 변경사항2](https://user-images.githubusercontent.com/98066327/163906793-58703c79-479c-4fbe-b48e-7b0de4b5fb83.PNG)
+
+- 언어를 utf-8로 인코딩하기 위해 인코딩 필터를 생성하고 필터를 적용시켜주는 매핑 추가
+- 초기화면인 웰컴파일 등록
+
+
+root-context.xml 파일 변경사항
+
+![루트콘텍스트 변경사항](https://user-images.githubusercontent.com/98066327/163906883-3e95d8bb-a21c-4fab-b23c-382d1a93b38f.PNG)
+
+- DB와 연결해주는 jdbc와 mybatis 설정 관련 도구 등록
+   (dataSource, jdbTemplate, sqlSession, sqlSessionTemplate)
+
+
+servlet-context.xml 파일 변경사항
+
+![서블릿컨텍스트 변경 사항](https://user-images.githubusercontent.com/98066327/163907300-683f6e8a-bca2-4354-b69d-1b549d589fab.PNG)
+
+- 파일업로드를 하기 위해 파일 업로드 처리하는 도구 등록
