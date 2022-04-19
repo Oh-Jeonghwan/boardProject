@@ -99,3 +99,52 @@ servlet-context.xml 파일 변경사항
 ![서블릿컨텍스트 변경 사항](https://user-images.githubusercontent.com/98066327/163907300-683f6e8a-bca2-4354-b69d-1b549d589fab.PNG)
 
 - 파일업로드를 하기 위해 파일 업로드 처리하는 도구 등록
+
+# 새로 알게 된 것
+
+* 깃 쓰는 방법
+1. 깃 프로그램 설치
+2. 깃 홈페이지에 원격 리파지토리 생성
+3. pc에 로컬 리파지 토리 생성(cmd > cd명령어 해당파일로 이동 > git init) or (이동 후 git clone)
+4. 해당 프로젝트 파일로 이동하여 git config --global user.name "이름" / git config --global user.email "e-mail"
+5. 추가 파일이 있으면 git add -A 후에 git commit -m "적고 싶은 내용" / 변경 파일이 있으면 git commit -a -m "적고 싶은 내용"
+
+   (LF will be replaced by CRLF in~ 오류 뜨면 git config (--global) core.autocrlf true (윈도우에서 오류))
+6. git push
+7.  cd로 해당파일로 이동 git pull [별명] [브랜치명](같은 파일 수정 시 엉킴)
+    깃 별명 알아보는 명령어 git remote cf)git remote add ~: 깃 별명 지어주는 명령어 
+    
+- jsp jstl 형식의 날짜 파싱 방법 (fmt)
+
+<fmt: setLocale value="en:us" scope="session"> (일반적인 날짜가 아니라 이같은 Fri Sep 08 17:05:57 KST 2017)
+
+<fmt: parseDate value="${날짜키값}" var="알아서 지정" pattern="바꾸기 전 날짜 패턴"(EEE MMM d HH:mm:ss z yyyy)>
+	
+<fmt: formatDate value=""${var지정 값} type="both" or pattern="원하는 패턴">
+
+- jstl라이브러리가 있는데도 안 된다면, jstl jar파일을 톰캣 라이브러리에 추가해보자
+
+
+# 다시 상기하게 된 것
+- 롬복은 pom.xml 파일에 dependency 등록만 했다고 되는 것이 아니라 jar파일 다운 받고 설치 필요
+
+- 스프링 사용 시 인코딩 환경설정
+
+json files, xml files, web(css files, html files, jsp files), general -workspace/ -editors -textEditors -spelling
+
+- 웰컴 파일은 webapp 파일 아래있어야 하고, web.xml에서 웰컴파일 등록해야한다.
+
+  (welcome-file-list) (welcome-file) index.jsp (/welcome-file) (/welcome-file-list) 
+
+- problem 활용
+
+- 로깅 다시 공부, 디버깅 공부하기 
+
+
+# 느낀 점
+- 공부를 많이 해야겠다.(빨리 뭐부터 공부해야할지 정해야겠다.)
+- class not found Exception 오류가 나면서 잘 돌아가던 프로젝트가 안 돌아가길래 의례적으로 또 오류가 났구나 싶어서 이클립스만 껐다 켰다만 반복했는데 알고보니 잘못 집어넣어 놓은 jar파일 때문에 빌드가 제대로 이루어 지지 않은 상황이었다. 그러면서 또 다른 오류를 불러 일으켰다. 의례적인 오류는 흔치않다. 그러니 오류가 나면 오류의 이유를 알아보는 습관을 길러야 겠다.
+- 개발할 떄 logging은 많이 활용된다고 한다. 학원에서는 배웠지만 이번에 쓰지 못 했다. 로깅을 다시 공부해보고 쓰는 습관을 들여야한다.
+- 디버깅 하는 법 공부하고 디버깅 하는 습관을 들이자.
+- 환경설정을 하면서 지속적으로 오류가 났고 많은 시간을 할애했지만 기록하지 못 했다. 어떤 프로젝트를 하든 기록하는 습관을 들여야겠다. 
+
